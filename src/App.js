@@ -12,7 +12,7 @@ class App extends Component {
       <div className="container">
         <Switch>
           <Route path="/" exact component={ColectionsCard} />
-          <Route path="/SubColections" exact component={SubColections} />
+          <Route path="/SubColections/:id" exact component={SubColections} />
           <Route
             path="/SubColections/SubColectionContent/:id"
             exact

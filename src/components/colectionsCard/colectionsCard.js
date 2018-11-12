@@ -4,17 +4,17 @@ import data from "../data/A1";
 
 class ColectionsCard extends Component {
   render() {
-    return (
+    return data.map(items => (
       <div className="card text-center" style={{ marginBottom: "10px" }}>
-        <div className="card-header">{data.a1.uberschrift}</div>
+        <div className="card-header">{items.uberschrift}</div>
         <div className="card-body">
-          <p className="card-text">{data.a1.beschreibung}</p>
-          <Link to="/SubColections" className="btn btn-primary">
+          <p className="card-text">{items.beschreibung}</p>
+          <Link to={"/SubColections/" + items.id} className="btn btn-primary">
             Go to the class
           </Link>
         </div>
       </div>
-    );
+    ));
   }
 }
 
