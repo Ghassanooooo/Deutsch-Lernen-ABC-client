@@ -19,7 +19,7 @@ class App extends Component {
         <Navigation />
         <Switch>
           <Route path="/" exact component={Level} />
-          <Route path="/SubColections/:id" exact component={Subject} />
+          <Route path="/subject/:id" exact component={Subject} />
           <Route
             path="/SubColections/SubColectionContent/:id"
             exact

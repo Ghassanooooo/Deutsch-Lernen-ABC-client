@@ -1,11 +1,18 @@
 import React, { Component, Fragment } from "react";
+import InputFild from "../common/input/input";
+
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import * as actions from "../../store/actions";
 
 class AddNewSubject extends Component {
   render() {
+    const { errors } = this.props;
     return (
       <Fragment>
         <h3>Add a new object</h3>
         <form>
+          <InputFild />
           <div className="form-group">
             <label for="formGroupExampleInput">Object Title</label>
             <input
@@ -51,4 +58,11 @@ class AddNewSubject extends Component {
   }
 }
 
-export default AddNewSubject;
+const mapStateToProps = state => ({
+  errors: state.errors
+});
+
+export default connect(
+  mapStateToProps,
+  actions
+)(withRouter(AddNewSubject));
