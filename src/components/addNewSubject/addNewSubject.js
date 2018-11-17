@@ -42,7 +42,7 @@ class AddNewSubject extends Component {
               placeholder="Add Description in Arabic"
             />
           </div>
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" className="btn btn-primary">
             ADD
           </button>
         </form>

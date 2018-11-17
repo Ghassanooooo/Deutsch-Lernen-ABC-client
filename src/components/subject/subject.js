@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
 import data from "../data/A1";
 
-class SubColections extends Component {
+class Subject extends Component {
   render() {
     return (
       <Fragment>
@@ -17,7 +17,7 @@ class SubColections extends Component {
             {data.map(SubColection =>
               SubColection.id === this.props.match.params.id
                 ? SubColection.kursinhalte.map(sub => (
-                    <li className="list-group-item">
+                    <li key={sub.id} className="list-group-item">
                       <Link to={`/SubColections/SubColectionContent/${sub.id}`}>
                         {sub.titel}
                       </Link>
@@ -32,4 +32,4 @@ class SubColections extends Component {
   }
 }
 
-export default withRouter(SubColections);
+export default withRouter(Subject);

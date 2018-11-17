@@ -42,7 +42,7 @@ class EditSubject extends Component {
               placeholder="Edit Description in Arabic"
             />
           </div>
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" className="btn btn-primary">
             EDIT
           </button>
         </form>

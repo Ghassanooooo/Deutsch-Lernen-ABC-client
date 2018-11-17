@@ -9,19 +9,19 @@ class SubColectionContent extends Component {
       colection.kursinhalte
         .filter(FF => FF.id === this.props.match.params.id)
         .map(item => (
-          <div className="card">
+          <div key={item.id} className="card">
             <div className="card-header">{item.titel}</div>
             <div className="card-body">
               <blockquote className="blockquote mb-0">
                 {item.inhalten.map(inhalt => (
-                  <p>
+                  <p key={inhalt.deutsch}>
                     {inhalt.deutsch} | {inhalt.arabisch} --{" "}
                     {inhalt.beschreibung}
                   </p>
                 ))}
 
                 {item.beispielen.map(beispiele => (
-                  <footer className="blockquote-footer">
+                  <footer key={beispiele.deutsch} className="blockquote-footer">
                     {beispiele.deutsch} |
                     <cite title="Source Title">{beispiele.arabisch}</cite>
                   </footer>
