@@ -1,5 +1,6 @@
 import * as actionType from "./actionTypes";
 import axios from "axios";
+import setAxiosAuth from '../../setAxiosAuthHeader'
 
 export const signup = (data, history) => async dispatch => {
   dispatch(setPostLoading());
@@ -22,16 +23,26 @@ export const signup = (data, history) => async dispatch => {
     });
   }
 };
+// export const checkAuthTimeout = (expiresTime) => {
+//    return dispatch => {
+//        setTimeout(() => {
+//            dispatch(logout())
+//        }, expiresTime)
+//    }
+// }
 
 export const login = (data, history) => async dispatch => {
   dispatch(setPostLoading());
   try {
-    const user = await axios.post(
-      "https://deutsch-lernen-abc.herokuapp.com/api/user/login",
-      data
-    );
+    const user = await axios.post("http://localhost:5000/api/user/login", data);
     if (user) {
+      console.log(user)
       dispatch(clearErrors());
+       localStorage.setItem('token', user.data.token)
+       localStorage.setItem('expirationDate', user.data.expirationDate)
+      localStorage.setItem('userId', user.data.userId)
+        setAxiosAuth(user.data.token)
+        // dispatch(checkAuthTimeout(user.data.expirationDate))
       dispatch({
         type: actionType.LOGIN_SUCCEED
       });
@@ -47,34 +58,29 @@ export const login = (data, history) => async dispatch => {
     });
   }
 };
-export const logout = history => async dispatch => {
-  dispatch(setPostLoading());
+export const logout = () =>dispatch => {
 
-  const user = await axios.post(
-    "https://deutsch-lernen-abc.herokuapp.com/api/user/logout"
-  );
-  if (user) {
-    dispatch(clearErrors());
-    dispatch({
-      type: actionType.LOGOUT_SUCCEED
-    });
-    history.push("/");
-  }
-};
-export const currentUser = () => async dispatch => {
-  dispatch(setPostLoading());
 
-  const user = await axios.get(
-    "https://deutsch-lernen-abc.herokuapp.com/api/user/current-user"
-  );
-  if (user) {
-    dispatch(clearErrors());
-    dispatch({
-      type: actionType.CURRENT_USER,
-      payload: user
-    });
+    localStorage.removeItem('token')
+    localStorage.removeItem('userId')
+    localStorage.removeItem('expirationDate')
+
+
+      dispatch( {
+        type: actionType.LOGOUT_SUCCEED
+      })
+}
+
+
+
+export const currentUser = ()=>{
+  return{
+    type: actionType.CURRENT_USER,
+    userId: localStorage.getItem('userId'),
+    token:localStorage.getItem('token')
   }
-};
+}
+
 
 // Set loading state
 export const setPostLoading = () => {

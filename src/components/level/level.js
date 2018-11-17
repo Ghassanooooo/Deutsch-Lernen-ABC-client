@@ -1,8 +1,13 @@
 import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
+import * as actions from "../../store/actions";
 import { Link } from "react-router-dom";
 import data from "../data/A1";
 
 class Level extends Component {
+  componentDidMount() {
+    this.props.currentUser();
+  }
   render() {
     return (
       <Fragment>
@@ -31,5 +36,7 @@ class Level extends Component {
     );
   }
 }
-
-export default Level;
+export default connect(
+  null,
+  actions
+)(Level);

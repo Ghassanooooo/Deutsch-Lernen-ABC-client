@@ -2,6 +2,7 @@ import * as actionType from "../actions/actionTypes";
 
 const initialState = {
   user: null,
+  token:null,
   loading: false
 };
 
@@ -10,7 +11,8 @@ export default function(state = initialState, action) {
     case actionType.CURRENT_USER:
       return {
         ...state,
-        user: action.payload
+        user: action.userId,
+        token: action.token
       };
 
     case actionType.LOADING:
@@ -32,7 +34,9 @@ export default function(state = initialState, action) {
     case actionType.LOGOUT_SUCCEED:
       return {
         ...state,
-        loading: false
+        loading: false,
+        user: null,
+        token: null
       };
     default:
       return state;

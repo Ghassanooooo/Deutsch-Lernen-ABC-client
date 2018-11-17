@@ -4,17 +4,18 @@ import { withRouter } from "react-router-dom";
 import * as actions from "../../store/actions";
 
 class LogoutButton extends Component {
-  onSubmitHandler = e => {
-    e.preventDefault();
-    this.props.logout(this.props.history);
-  };
+
+  logoutHandler=()=>{
+this.props.logout()
+    this.props.history.push("/")
+  }
   render() {
     return (
-      <form onSubmit={this.onSubmitHandler}>
-        <button type="submit" className="btn btn-primary">
+
+        <button type="button" onClick={this.logoutHandler} className="btn btn-primary">
           Logout
         </button>
-      </form>
+
     );
   }
 }

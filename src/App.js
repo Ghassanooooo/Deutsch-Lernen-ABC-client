@@ -4,9 +4,6 @@ import "./App.css";
 import Level from "./components/level/level";
 import Subject from "./components/subject/subject";
 import SubColectionContent from "./components/subColectionContent/subColectionContent";
-import { connect } from "react-redux";
-import * as actions from "./store/actions";
-
 import AddNewSubject from "./components/addNewSubject/addNewSubject";
 import EditSubject from "./components/editSubject/editSubject";
 import { Route, Switch } from "react-router-dom";
@@ -16,9 +13,6 @@ import Login from "./components/login/login";
 import Signup from "./components/signup/signup";
 
 class App extends Component {
-  componentDidMount() {
-    this.props.currentUser();
-  }
   render() {
     return (
       <div className="container">
@@ -53,7 +47,4 @@ class App extends Component {
     );
   }
 }
-export default connect(
-  null,
-  actions
-)(App);
+export default App;
