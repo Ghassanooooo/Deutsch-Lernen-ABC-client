@@ -44,7 +44,7 @@ export const login = (data, history) => async dispatch => {
       localStorage.setItem("token", user.data.token);
       localStorage.setItem("expirationDate", user.data.expirationDate);
       localStorage.setItem("userId", user.data.userId);
-      // setAxiosAuth(user.data.token);
+      setAxiosAuth(user.data.token);
       // dispatch(checkAuthTimeout(user.data.expirationDate))
       dispatch({
         type: actionType.LOGIN_SUCCEED

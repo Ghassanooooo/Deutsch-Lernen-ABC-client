@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import InputFild from "../common/input/input";
-
+import axios from "axios";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import * as actions from "../../store/actions";
@@ -23,12 +23,22 @@ class AddEditSubjectCountent extends Component {
       beispielenDeutsch: this.state.beispielenDeutsch,
       beispielenArabisch: this.state.beispielenArabisch
     };
-    this.props.addSubjectCountent(
-      this.props.match.params.id,
-      SubjectCountentData,
-      this.props.history
-    );
-    console.log(this.props.match.params.id);
+    axios
+      .post(
+        "http://localhost:5000/api/subjectContent/add/" +
+          this.props.match.params.id,
+        SubjectCountentData
+      )
+      .then(res => {
+        this.props.history.push("/subject/subject-content/" + res.data._id);
+      });
+
+    // this.props.addSubjectCountent(
+    //   this.props.match.params.id,
+    //   SubjectCountentData,
+    //   this.props.history
+    // );
+    // console.log(this.props.match.params.id);
   };
   onChangeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });

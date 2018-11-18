@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { withRouter, Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions";
+import Spinner from "../common/spinner/spinner";
 
 class subjectContent extends Component {
   componentDidMount() {
@@ -19,7 +20,7 @@ class subjectContent extends Component {
         >
           add & Edit
         </Link>
-        {this.props.subjectsCountent && this.props.match.params.id && (
+        {this.props.subjectsCountent ? (
           <div className="card">
             <div className="card-header">
               {this.props.subjectsCountent.beschreibung}
@@ -42,6 +43,8 @@ class subjectContent extends Component {
               </blockquote>
             </div>
           </div>
+        ) : (
+          <Spinner />
         )}
       </Fragment>
     );

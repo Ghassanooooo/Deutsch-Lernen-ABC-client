@@ -4,7 +4,9 @@ class InputFild extends Component {
   render() {
     let errors = null;
     if (this.props.errors) {
-      errors = this.props.errors.find(o => o.param === this.props.name);
+      errors =
+        this.props.errors.find(o => o.param === this.props.name) ||
+        this.props.errors;
     }
     return (
       <div className="form-group">

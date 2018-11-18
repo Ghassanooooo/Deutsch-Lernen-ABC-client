@@ -4,6 +4,7 @@ import InputFild from "../common/input/input";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import * as actions from "../../store/actions";
+import axios from "axios";
 
 class AddNewSubject extends Component {
   state = {
@@ -12,15 +13,27 @@ class AddNewSubject extends Component {
   };
   onSubmitHandler = e => {
     e.preventDefault();
-    this.props.addSubject(
-      {
-        titeldeutsch: this.state.titeldeutsch,
-        titelarabisch: this.state.titelarabisch
-      },
-      this.props.match.params.id,
-      this.props.history
-    );
-    console.log(this.props.match.params.id);
+
+    axios
+      .post(
+        "https://deutsch-lernen-abc.herokuapp.com/api/subject/add/" +
+          this.props.match.params.id,
+        {
+          titeldeutsch: this.state.titeldeutsch,
+          titelarabisch: this.state.titelarabisch
+        }
+      )
+      .then(subject => this.props.history.push(`/subject/${subject.data._id}`));
+
+    // this.props.addSubject(
+    // {
+    //   titeldeutsch: this.state.titeldeutsch,
+    //   titelarabisch: this.state.titelarabisch
+    // },
+    //   this.props.match.params.id,
+    //   this.props.history
+    // );
+    // console.log(this.props.match.params.id);
   };
   onChangeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });

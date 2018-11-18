@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions";
-import data from "../data/A1";
+import Spinner from "../common/spinner/spinner";
 
 class Subject extends Component {
   componentDidMount() {
@@ -14,27 +14,28 @@ class Subject extends Component {
     const { errors } = this.props;
     return (
       <Fragment>
-        {this.props.match.params.id && (
-          <Link
-            to={"/add-new-subject/" + this.props.match.params.id}
-            className="btn btn-primary mr-3 mt-5"
-          >
-            add
-          </Link>
-        )}
+        <Link
+          to={"/add-new-subject/" + this.props.match.params.id}
+          className="btn btn-primary mr-3 mt-5"
+        >
+          add
+        </Link>
 
-        <div className="card mt-5">
-          <ul className="list-group list-group-flush">
-            {this.props.subjects &&
-              this.props.subjects.map(subject => (
+        {this.props.subjects ? (
+          <div className="card mt-5">
+            <ul className="list-group list-group-flush">
+              {this.props.subjects.map(subject => (
                 <li key={subject._id} className="list-group-item">
                   <Link to={`/subject/subject-content/${subject._id}`}>
                     {subject.titeldeutsch} || {subject.titelarabisch}
                   </Link>
                 </li>
               ))}
-          </ul>
-        </div>
+            </ul>
+          </div>
+        ) : (
+          <Spinner />
+        )}
       </Fragment>
     );
   }

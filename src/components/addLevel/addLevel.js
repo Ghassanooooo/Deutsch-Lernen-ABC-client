@@ -5,6 +5,9 @@ import { withRouter } from "react-router-dom";
 import * as actions from "../../store/actions";
 
 class AddLevel extends Component {
+  componentWillMount() {
+    this.props.currentUser();
+  }
   state = {
     titeldeutsch: "",
     beschreibungdeutsch: "",
@@ -37,7 +40,6 @@ class AddLevel extends Component {
             name="titeldeutsch"
             value={this.state.titeldeutsch}
             onChange={this.onChangeHandler}
-            errors={errors}
             label="German Title"
             placeholder="Add Title in German"
           />
@@ -45,7 +47,6 @@ class AddLevel extends Component {
             name="beschreibungdeutsch"
             value={this.state.beschreibungdeutsch}
             onChange={this.onChangeHandler}
-            errors={errors}
             label="German Discription"
             placeholder="Add Discription in German"
           />
@@ -53,7 +54,6 @@ class AddLevel extends Component {
             name="titelarabisch"
             value={this.state.titelarabisch}
             onChange={this.onChangeHandler}
-            errors={errors}
             label="Arabic Title"
             placeholder="Add Title in Arabic"
           />
@@ -62,7 +62,6 @@ class AddLevel extends Component {
             name="beschreibungarabisch"
             value={this.state.beschreibungarabisch}
             onChange={this.onChangeHandler}
-            errors={errors}
             label="Arabic Discription"
             placeholder="Add Discription in Arabic"
           />
