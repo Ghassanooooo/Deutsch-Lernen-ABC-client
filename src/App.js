@@ -11,34 +11,46 @@ import AddLevel from "./components/addLevel/addLevel";
 import Navigation from "./components/navigation/navigation";
 import Login from "./components/login/login";
 import Signup from "./components/signup/signup";
+import addEditSubjectCountent from "./components/addEditSubjectCountent/addEditSubjectCountent";
 
 class App extends Component {
   render() {
     return (
-      <div className="container">
+      <div>
         <Navigation />
         <Switch>
-          <Route path="/" exact component={Level} />
-          <Route path="/subject/:id" exact component={Subject} />
-          <Route
-            path="/subject/subject-content/:id"
-            exact
-            component={SubjectContent}
-          />
-          <Route path="/level/add-level" exact component={AddLevel} />
-          {/* <Route
+          <div className="container">
+            <Route path="/" exact component={Level} />
+            <Route path="/subject/:id" exact component={Subject} />
+            <Route
+              path="/subject/subject-content/:id"
+              exact
+              component={SubjectContent}
+            />
+            <Route path="/level/add-level" exact component={AddLevel} />
+            {/* <Route
             path="/SubColections/SubColectionContent/:id"
             exact
             component={SubColectionContent}
           /> */}
 
-          <Route path="/login" exact component={Login} />
+            <Route path="/login" exact component={Login} />
 
-          <Route path="/signup" exact component={Signup} />
+            <Route path="/signup" exact component={Signup} />
 
-          <Route path="/add-new-subject" exact component={AddNewSubject} />
+            <Route
+              path="/add-new-subject/:id"
+              exact
+              component={AddNewSubject}
+            />
+            <Route
+              path="/add-edit-new-subject-Countent/:id"
+              exact
+              component={addEditSubjectCountent}
+            />
 
-          <Route path="/edit-subject" exact component={EditSubject} />
+            <Route path="/edit-subject" exact component={EditSubject} />
+          </div>
         </Switch>
 
         {/* <SubColections />

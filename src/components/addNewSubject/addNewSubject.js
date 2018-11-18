@@ -6,53 +6,51 @@ import { withRouter } from "react-router-dom";
 import * as actions from "../../store/actions";
 
 class AddNewSubject extends Component {
+  state = {
+    titeldeutsch: "",
+    titelarabisch: ""
+  };
+  onSubmitHandler = e => {
+    e.preventDefault();
+    this.props.addSubject(
+      {
+        titeldeutsch: this.state.titeldeutsch,
+        titelarabisch: this.state.titelarabisch
+      },
+      this.props.match.params.id,
+      this.props.history
+    );
+    console.log(this.props.match.params.id);
+  };
+  onChangeHandler = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
   render() {
     const { errors } = this.props;
     return (
       <Fragment>
-        <h3>Add a new object</h3>
-        <form>
-          <InputFild />
-          <div className="form-group">
-            <label for="formGroupExampleInput">Object Title</label>
-            <input
-              type="text"
-              className="form-control"
-              id="formGroupExampleInput"
-              placeholder="Add the title"
+        <h3>Add a new Subject</h3>
+        {this.props.match.params.id && (
+          <form onSubmit={this.onSubmitHandler}>
+            <InputFild
+              name="titeldeutsch"
+              value={this.state.titeldeutsch}
+              onChange={this.onChangeHandler}
+              label="German Title"
+              placeholder="Add Title in German"
             />
-          </div>
-          <div className="form-group">
-            <label for="formGroupExampleInput2">the object in German</label>
-            <input
-              type="text"
-              className="form-control"
-              id="formGroupExampleInput2"
-              placeholder="Add the object in german"
+            <InputFild
+              name="titelarabisch"
+              value={this.state.titelarabisch}
+              onChange={this.onChangeHandler}
+              label="Arabic Title"
+              placeholder="Add Title in Arabic"
             />
-          </div>
-          <div className="form-group">
-            <label for="formGroupExampleInput2">the object in Arabic</label>
-            <input
-              type="text"
-              className="form-control"
-              id="formGroupExampleInput2"
-              placeholder="Add the object in Arabic"
-            />
-          </div>
-          <div className="form-group">
-            <label for="formGroupExampleInput2">Description in Arabic</label>
-            <input
-              type="text"
-              className="form-control"
-              id="formGroupExampleInput2"
-              placeholder="Add Description in Arabic"
-            />
-          </div>
-          <button type="submit" className="btn btn-primary">
-            ADD
-          </button>
-        </form>
+            <button type="submit" className="btn btn-primary">
+              ADD Subject
+            </button>
+          </form>
+        )}
       </Fragment>
     );
   }

@@ -34,14 +34,17 @@ export const signup = (data, history) => async dispatch => {
 export const login = (data, history) => async dispatch => {
   dispatch(setPostLoading());
   try {
-    const user = await axios.post("http://localhost:5000/api/user/login", data);
+    const user = await axios.post(
+      "https://deutsch-lernen-abc.herokuapp.com/api/user/login",
+      data
+    );
     if (user) {
       console.log(user);
       dispatch(clearErrors());
       localStorage.setItem("token", user.data.token);
       localStorage.setItem("expirationDate", user.data.expirationDate);
       localStorage.setItem("userId", user.data.userId);
-      setAxiosAuth(user.data.token);
+      // setAxiosAuth(user.data.token);
       // dispatch(checkAuthTimeout(user.data.expirationDate))
       dispatch({
         type: actionType.LOGIN_SUCCEED

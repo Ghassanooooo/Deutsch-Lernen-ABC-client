@@ -13,12 +13,16 @@ class AddLevel extends Component {
   };
   onSubmitHandler = e => {
     e.preventDefault();
-    this.props.addLevel({
-      titeldeutsch: this.state.titeldeutsch,
-      beschreibungdeutsch: this.state.beschreibungdeutsch,
-      titelarabisch: this.state.titelarabisch,
-      beschreibungarabisch: this.state.beschreibungarabisch
-    });
+    this.props.addLevel(
+      {
+        titeldeutsch: this.state.titeldeutsch,
+        beschreibungdeutsch: this.state.beschreibungdeutsch,
+        titelarabisch: this.state.titelarabisch,
+        beschreibungarabisch: this.state.beschreibungarabisch
+      },
+
+      this.props.history
+    );
   };
   onChangeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });

@@ -24,6 +24,23 @@ export const getLevels = () => async dispatch => {
   }
 };
 
+export const addLevel = (data, history) => async dispatch => {
+  try {
+    const level = await axios.post(
+      "https://deutsch-lernen-abc.herokuapp.com/api/level/add",
+      data
+    );
+    if (level) {
+      history.push("/");
+    }
+  } catch (e) {
+    dispatch({
+      type: actionType.GET_ERRORS,
+      payload: e.response.data.error || null
+    });
+  }
+};
+
 // Set loading state
 export const setPostLoading = () => {
   return {

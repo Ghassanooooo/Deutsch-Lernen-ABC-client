@@ -14,12 +14,15 @@ class Subject extends Component {
     const { errors } = this.props;
     return (
       <Fragment>
-        <Link to="/add-new-subject" className="btn btn-primary mr-3 mt-5">
-          add
-        </Link>
-        <Link to="/edit-subject" className="btn btn-warning mt-5">
-          edit
-        </Link>
+        {this.props.match.params.id && (
+          <Link
+            to={"/add-new-subject/" + this.props.match.params.id}
+            className="btn btn-primary mr-3 mt-5"
+          >
+            add
+          </Link>
+        )}
+
         <div className="card mt-5">
           <ul className="list-group list-group-flush">
             {this.props.subjects &&

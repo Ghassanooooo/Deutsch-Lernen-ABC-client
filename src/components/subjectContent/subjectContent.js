@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import React, { Component, Fragment } from "react";
+import { withRouter, Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions";
 
@@ -12,30 +12,38 @@ class subjectContent extends Component {
   render() {
     const { errors } = this.props;
     return (
-      this.props.subjectsCountent && (
-        <div className="card">
-          <div className="card-header">
-            {this.props.subjectsCountent.beschreibung}
+      <Fragment>
+        <Link
+          to={"/add-edit-new-subject-Countent/" + this.props.match.params.id}
+          className="btn btn-primary mr-3 mt-5"
+        >
+          add & Edit
+        </Link>
+        {this.props.subjectsCountent && this.props.match.params.id && (
+          <div className="card">
+            <div className="card-header">
+              {this.props.subjectsCountent.beschreibung}
+            </div>
+            <div className="card-body">
+              <blockquote className="blockquote mb-0">
+                {this.props.subjectsCountent.inhalten &&
+                  this.props.subjectsCountent.inhalten.map(inhalt => (
+                    <p key={inhalt._id}>
+                      {inhalt.deutsch} | {inhalt.arabisch}
+                    </p>
+                  ))}
+                {this.props.subjectsCountent.beispielen &&
+                  this.props.subjectsCountent.beispielen.map(beispiel => (
+                    <footer key={beispiel._id} className="blockquote-footer">
+                      {beispiel.deutsch} |
+                      <cite title="Source Title">{beispiel.arabisch}</cite>
+                    </footer>
+                  ))}
+              </blockquote>
+            </div>
           </div>
-          <div className="card-body">
-            <blockquote className="blockquote mb-0">
-              {this.props.subjectsCountent.inhalten &&
-                this.props.subjectsCountent.inhalten.map(inhalt => (
-                  <p key={inhalt._id}>
-                    {inhalt.deutsch} | {inhalt.arabisch}
-                  </p>
-                ))}
-              {this.props.subjectsCountent.beispielen &&
-                this.props.subjectsCountent.beispielen.map(beispiel => (
-                  <footer key={beispiel._id} className="blockquote-footer">
-                    {beispiel.deutsch} |
-                    <cite title="Source Title">{beispiel.arabisch}</cite>
-                  </footer>
-                ))}
-            </blockquote>
-          </div>
-        </div>
-      )
+        )}
+      </Fragment>
     );
   }
 }
