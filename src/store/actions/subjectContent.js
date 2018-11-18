@@ -5,7 +5,7 @@ export const getSubjectsContent = id => async dispatch => {
   dispatch(setPostLoading());
   try {
     const subjectsContent = await axios.get(
-      "http://localhost:5000/api/subjectContent/:" + id
+      "http://localhost:5000/api/subjectContent/" + id
     );
     if (subjectsContent) {
       dispatch({

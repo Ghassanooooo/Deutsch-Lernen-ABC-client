@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import "./App.css";
 import Level from "./components/level/level";
 import Subject from "./components/subject/subject";
-import SubColectionContent from "./components/subColectionContent/subColectionContent";
+import SubjectContent from "./components/subjectContent/subjectContent";
 import AddNewSubject from "./components/addNewSubject/addNewSubject";
 import EditSubject from "./components/editSubject/editSubject";
 import { Route, Switch } from "react-router-dom";
@@ -21,16 +21,16 @@ class App extends Component {
           <Route path="/" exact component={Level} />
           <Route path="/subject/:id" exact component={Subject} />
           <Route
-            path="/SubColections/SubColectionContent/:id"
+            path="/subject/subject-content/:id"
             exact
-            component={SubColectionContent}
+            component={SubjectContent}
           />
           <Route path="/level/add-level" exact component={AddLevel} />
-          <Route
+          {/* <Route
             path="/SubColections/SubColectionContent/:id"
             exact
             component={SubColectionContent}
-          />
+          /> */}
 
           <Route path="/login" exact component={Login} />
 

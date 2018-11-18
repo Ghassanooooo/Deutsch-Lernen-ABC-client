@@ -11,10 +11,10 @@ class Subject extends Component {
     }
   }
   render() {
-    // const { errors } = this.props;
+    const { errors } = this.props;
     return (
       <Fragment>
-        {/* <Link to="/add-new-subject" className="btn btn-primary mr-3 mt-5">
+        <Link to="/add-new-subject" className="btn btn-primary mr-3 mt-5">
           add
         </Link>
         <Link to="/edit-subject" className="btn btn-warning mt-5">
@@ -22,25 +22,23 @@ class Subject extends Component {
         </Link>
         <div className="card mt-5">
           <ul className="list-group list-group-flush">
-            {data.map(SubColection =>
-              SubColection.id === this.props.match.params.id
-                ? SubColection.kursinhalte.map(sub => (
-                    <li key={sub.id} className="list-group-item">
-                      <Link to={`/SubColections/SubColectionContent/${sub.id}`}>
-                        {sub.titel}
-                      </Link>
-                    </li>
-                  ))
-                : null
-            )}
+            {this.props.subjects &&
+              this.props.subjects.map(subject => (
+                <li key={subject._id} className="list-group-item">
+                  <Link to={`/subject/subject-content/${subject._id}`}>
+                    {subject.titeldeutsch} || {subject.titelarabisch}
+                  </Link>
+                </li>
+              ))}
           </ul>
-        </div> */}
+        </div>
       </Fragment>
     );
   }
 }
 const mapStateToProps = state => ({
-  errors: state.errors
+  errors: state.errors,
+  subjects: state.subjects.subjects
 });
 export default connect(
   mapStateToProps,

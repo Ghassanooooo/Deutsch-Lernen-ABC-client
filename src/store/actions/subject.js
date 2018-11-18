@@ -7,7 +7,7 @@ export const getSubjects = id => async dispatch => {
 
   try {
     const subject = await axios.get(
-      "https://deutsch-lernen-abc.herokuapp.com/api/subject/:" + id
+      "https://deutsch-lernen-abc.herokuapp.com/api/subject/" + id
     );
     if (subject) {
       console.log(subject.data);

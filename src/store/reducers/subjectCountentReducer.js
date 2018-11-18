@@ -1,7 +1,7 @@
 import * as actionType from "../actions/actionTypes";
 
 const initialState = {
-  subjectCountent: null,
+  subjectsCountent: null,
   loading: false
 };
 
@@ -10,7 +10,7 @@ export default function(state = initialState, action) {
     case actionType.FETCH_SUBJECT_CONTENT_SUCCEED:
       return {
         ...state,
-        subjectCountent: action.payload,
+        subjectsCountent: action.payload,
         loading: false
       };
 
