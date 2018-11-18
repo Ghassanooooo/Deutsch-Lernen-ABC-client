@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions";
-import axios from "axios";
 import data from "../data/A1";
 
 class Subject extends Component {
@@ -10,11 +9,6 @@ class Subject extends Component {
     if (this.props.match.params.id) {
       this.props.getSubjects(this.props.match.params.id);
     }
-    axios
-      .get(
-        "https://deutsch-lernen-abc.herokuapp.com/api/subject/:5bec5e6a862c8d0584bf2322"
-      )
-      .then(data => console.log(data));
   }
   render() {
     // const { errors } = this.props;

@@ -4,9 +4,7 @@ import axios from "axios";
 export const getLevels = () => async dispatch => {
   dispatch(setPostLoading());
   try {
-    const levels = await axios.get(
-      "https://deutsch-lernen-abc.herokuapp.com/api/level"
-    );
+    const levels = await axios.get("/api/level");
     if (levels) {
       dispatch({
         type: actionType.FETCH_LEVELS_SUCCEED,
