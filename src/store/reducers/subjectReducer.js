@@ -1,16 +1,21 @@
 import * as actionType from "../actions/actionTypes";
 
 const initialState = {
-  subjects: null,
+  subjects: [],
   loading: false
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case actionType.ADD_NEW_SUBJECT:
+      return {
+        ...state,
+        subjects: state.subjects.push(action.payload)
+      };
     case actionType.FETCH_SUBJECT_SUCCEED:
       return {
         ...state,
-        subjects: action.payload,
+        subjects: action.payload || [],
         loading: false
       };
 

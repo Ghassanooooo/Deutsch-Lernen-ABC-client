@@ -23,15 +23,20 @@ class AddEditSubjectCountent extends Component {
       beispielenDeutsch: this.state.beispielenDeutsch,
       beispielenArabisch: this.state.beispielenArabisch
     };
-    axios
-      .post(
-        "http://localhost:5000/api/subjectContent/add/" +
-          this.props.match.params.id,
-        SubjectCountentData
-      )
-      .then(res => {
-        this.props.history.push("/subject/subject-content/" + res.data._id);
-      });
+    this.props.addSubjectsContent(
+      SubjectCountentData,
+      this.props.match.params.id,
+      this.props.history
+    );
+    // axios
+    //   .post(
+    //     "http://localhost:5000/api/subjectContent/add/" +
+    //       this.props.match.params.id,
+    //     SubjectCountentData
+    //   )
+    //   .then(res => {
+    //     this.props.history.push("/subject/subject-content/" + res.data._id);
+    //   });
 
     // this.props.addSubjectCountent(
     //   this.props.match.params.id,

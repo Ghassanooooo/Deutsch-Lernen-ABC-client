@@ -23,6 +23,26 @@ export const getSubjectsContent = id => async dispatch => {
     });
   }
 };
+export const addSubjectsContent = (data, id, history) => dispatch => {
+  axios
+    .post(
+      "https://deutsch-lernen-abc.herokuapp.com/api/subjectContent/add/" + id,
+      data
+    )
+    .then(SubjectsContent => {
+      history.push("/subject/subject-content/" + SubjectsContent.data.subject);
+      dispatch({
+        type: actionType.ADD_NEW_SUBJECT_CONTENT,
+        payload: SubjectsContent.data
+      });
+    })
+    .catch(e => {
+      dispatch({
+        type: actionType.GET_ERRORS,
+        payload: e.response.data.error || null
+      });
+    });
+};
 
 // Set loading state
 export const setPostLoading = () => {

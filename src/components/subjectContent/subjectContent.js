@@ -44,7 +44,7 @@ class subjectContent extends Component {
             </div>
           </div>
         ) : (
-          <Spinner />
+          <p>Please Add Subject Content</p>
         )}
       </Fragment>
     );

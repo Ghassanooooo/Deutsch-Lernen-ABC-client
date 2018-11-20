@@ -13,6 +13,11 @@ export default function(state = initialState, action) {
         levels: action.payload,
         loading: false
       };
+    case actionType.ADD_NEW_LEVEL:
+      return {
+        ...state,
+        levels: state.levels.concat(action.payload)
+      };
 
     case actionType.LOADING:
       return {

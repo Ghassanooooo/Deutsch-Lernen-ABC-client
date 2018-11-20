@@ -7,10 +7,15 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case actionType.ADD_NEW_SUBJECT_CONTENT:
+      return {
+        ...state,
+        subjectsCountent: action.payload
+      };
     case actionType.FETCH_SUBJECT_CONTENT_SUCCEED:
       return {
         ...state,
-        subjectsCountent: action.payload,
+        subjectsCountent: action.payload || null,
         loading: false
       };
 

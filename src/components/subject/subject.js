@@ -21,7 +21,7 @@ class Subject extends Component {
           add
         </Link>
 
-        {this.props.subjects ? (
+        {this.props.subjects.length > 0 ? this.props.loading ?<Spinner />: (
           <div className="card mt-5">
             <ul className="list-group list-group-flush">
               {this.props.subjects.map(subject => (
@@ -33,16 +33,15 @@ class Subject extends Component {
               ))}
             </ul>
           </div>
-        ) : (
-          <Spinner />
-        )}
+        ):<p> Please Add Some Subjects!</p>}
       </Fragment>
     );
   }
 }
 const mapStateToProps = state => ({
   errors: state.errors,
-  subjects: state.subjects.subjects
+  subjects: state.subjects.subjects,
+  loading: state.subjects.loading
 });
 export default connect(
   mapStateToProps,

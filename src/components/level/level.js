@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions";
 import { Link } from "react-router-dom";
+import Spinner from "../common/spinner/spinner";
 
 class Level extends Component {
   componentDidMount() {
@@ -14,7 +15,7 @@ class Level extends Component {
         <Link to={"/level/add-level"} className="btn btn-primary">
           Add New Level
         </Link>
-        {this.props.levels &&
+        {this.props.levels ? (
           this.props.levels.map(items => (
             <div
               key={items._id}
@@ -32,7 +33,10 @@ class Level extends Component {
                 </Link>
               </div>
             </div>
-          ))}
+          ))
+        ) : (
+          <Spinner />
+        )}
       </Fragment>
     );
   }
@@ -40,7 +44,8 @@ class Level extends Component {
 
 const mapStateToProps = state => ({
   errors: state.errors,
-  levels: state.levels.levels
+  levels: state.levels.levels,
+  loading: state.levels.loading
 });
 export default connect(
   mapStateToProps,

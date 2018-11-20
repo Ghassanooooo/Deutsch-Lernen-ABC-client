@@ -26,21 +26,25 @@ export const getSubjects = id => async dispatch => {
     });
   }
 };
-export const addSubject = (data, id, history) => async dispatch => {
-  try {
-    const subject = await axios.post(
+export const addSubject = (data, id, history) => dispatch => {
+  axios
+    .post(
       "https://deutsch-lernen-abc.herokuapp.com/api/subject/add/" + id,
       data
-    );
-    if (subject) {
-      history.push(`/subject/${subject.data._id}`);
-    }
-  } catch (e) {
-    dispatch({
-      type: actionType.GET_ERRORS,
-      payload: e.response.data.error || null
+    )
+    .then(subject => {
+      dispatch({
+        type: actionType.ADD_NEW_SUBJECT,
+        payload: subject.data
+      });
+      history.push(`/subject/subject-content/${subject.data._id}`);
+    })
+    .catch(e => {
+      dispatch({
+        type: actionType.GET_ERRORS,
+        payload: e.response.data.error || null
+      });
     });
-  }
 };
 
 // Set loading state
