@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/Deutsch-Lernen-ABC-client/precache-manifest.d7323eb145215acee5c22c377f8ea358.js"
+  "/Deutsch-Lernen-ABC-client/precache-manifest.d8e06ccb17b9313fb8212c55ba2eac52.js"
 );
 
 workbox.clientsClaim();
