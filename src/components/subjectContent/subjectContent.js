@@ -3,24 +3,38 @@ import { withRouter, Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions";
 import Spinner from "../common/spinner/spinner";
+import jwt_decode from "jwt-decode";
+import setAxiosAuth from "../../setAxiosAuthHeader";
 
 class subjectContent extends Component {
   componentDidMount() {
     if (this.props.match.params.id) {
       this.props.getSubjectsContent(this.props.match.params.id);
     }
+    if (localStorage.getItem("token")) {
+      const token = localStorage.getItem("token");
+      setAxiosAuth(token);
+      const userDecoded = jwt_decode(token);
+      if (userDecoded) {
+        this.props.currentUser(userDecoded);
+      }
+    }
   }
   render() {
     const { errors } = this.props;
     return (
       <Fragment>
-        <Link
-          to={"/add-edit-new-subject-Countent/" + this.props.match.params.id}
-          className="btn btn-primary mr-3 mt-5"
-        >
-          add & Edit
-        </Link>
-        {this.props.subjectsCountent ? (
+        {this.props.user ? (
+          <Link
+            to={"/add-edit-new-subject-Countent/" + this.props.match.params.id}
+            className="btn btn-primary mr-3 mt-5"
+          >
+            add & Edit
+          </Link>
+        ) : null}
+        {this.props.loading ? (
+          <Spinner />
+        ) : this.props.subjectsCountent ? (
           <div className="card">
             <div className="card-header">
               {this.props.subjectsCountent.beschreibung}
@@ -52,8 +66,10 @@ class subjectContent extends Component {
 }
 
 const mapStateToProps = state => ({
+  loading: state.subjectsCountent.loading,
   errors: state.errors,
-  subjectsCountent: state.subjectsCountent.subjectsCountent
+  subjectsCountent: state.subjectsCountent.subjectsCountent,
+  user: state.auth.user
 });
 export default connect(
   mapStateToProps,

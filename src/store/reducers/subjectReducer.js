@@ -10,7 +10,8 @@ export default function(state = initialState, action) {
     case actionType.ADD_NEW_SUBJECT:
       return {
         ...state,
-        subjects: state.subjects.push(action.payload)
+        subjects: state.subjects.push(action.payload),
+        loading: false
       };
     case actionType.FETCH_SUBJECT_SUCCEED:
       return {
@@ -19,7 +20,7 @@ export default function(state = initialState, action) {
         loading: false
       };
 
-    case actionType.LOADING:
+    case actionType.SUBJECT_LOADING:
       return {
         ...state,
         loading: true

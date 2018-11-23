@@ -16,10 +16,11 @@ export default function(state = initialState, action) {
     case actionType.ADD_NEW_LEVEL:
       return {
         ...state,
-        levels: state.levels.concat(action.payload)
+        levels: state.levels.concat(action.payload),
+        loading: false
       };
 
-    case actionType.LOADING:
+    case actionType.LEVELS_LOADING:
       return {
         ...state,
         loading: true

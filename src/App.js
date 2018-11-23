@@ -12,6 +12,7 @@ import Navigation from "./components/navigation/navigation";
 import Login from "./components/login/login";
 import Signup from "./components/signup/signup";
 import addEditSubjectCountent from "./components/addEditSubjectCountent/addEditSubjectCountent";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 class App extends Component {
   render() {

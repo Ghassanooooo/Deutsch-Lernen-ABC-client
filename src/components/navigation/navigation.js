@@ -1,4 +1,6 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
+
 import { Link } from "react-router-dom";
 import "./navigation.css";
 import LogoutButton from "../logoutButton/logoutButton";
@@ -27,19 +29,24 @@ class Navigation extends Component {
             id="navbarNavDropdown"
           >
             <ul className="navbar-nav">
-              <li className="nav-item">
-                <Link className="nav-link" to="/login">
-                  login
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/signup">
-                  Sign up
-                </Link>
-              </li>
-              <li className="nav-item">
-                <LogoutButton />
-              </li>
+              {this.props.user ? (
+                <li className="nav-item">
+                  <LogoutButton />
+                </li>
+              ) : (
+                <Fragment>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/login">
+                      login
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/signup">
+                      Sign up
+                    </Link>
+                  </li>
+                </Fragment>
+              )}
             </ul>
           </div>
         </div>
@@ -47,5 +54,7 @@ class Navigation extends Component {
     );
   }
 }
-
-export default Navigation;
+const mapStateToProps = state => ({
+  user: state.auth.user
+});
+export default connect(mapStateToProps)(Navigation);

@@ -1,10 +1,11 @@
 import * as actionType from "./actionTypes";
 import axios from "axios";
 import setAxiosAuth from "../../setAxiosAuthHeader";
+import jwt_decode from "jwt-decode";
 
 export const signup = (data, history) => async dispatch => {
-  dispatch(setPostLoading());
   try {
+    dispatch(setAuthLoading());
     const user = await axios.post(
       "https://deutsch-lernen-abc.herokuapp.com/api/user/signup",
       data
@@ -32,8 +33,8 @@ export const signup = (data, history) => async dispatch => {
 // }
 
 export const login = (data, history) => async dispatch => {
-  dispatch(setPostLoading());
   try {
+    dispatch(setAuthLoading());
     const user = await axios.post(
       "https://deutsch-lernen-abc.herokuapp.com/api/user/login",
       data
@@ -45,9 +46,10 @@ export const login = (data, history) => async dispatch => {
       localStorage.setItem("expirationDate", user.data.expirationDate);
       localStorage.setItem("userId", user.data.userId);
       setAxiosAuth(user.data.token);
-      // dispatch(checkAuthTimeout(user.data.expirationDate))
+      const tokenDecoded = jwt_decode(user.data.token);
       dispatch({
-        type: actionType.LOGIN_SUCCEED
+        type: actionType.LOGIN_SUCCEED,
+        payload: tokenDecoded
       });
       history.push("/");
     }
@@ -57,7 +59,7 @@ export const login = (data, history) => async dispatch => {
     });
     dispatch({
       type: actionType.GET_ERRORS,
-      payload: e.response.data.error
+      payload: e.response.data.error || null
     });
   }
 };
@@ -71,18 +73,17 @@ export const logout = () => dispatch => {
   });
 };
 
-export const currentUser = () => {
+export const currentUser = userData => {
   return {
-    type: actionType.CURRENT_USER,
-    userId: localStorage.getItem("userId"),
-    token: localStorage.getItem("token")
+    type: actionType.LOGIN_SUCCEED,
+    payload: userData
   };
 };
 
 // Set loading state
-export const setPostLoading = () => {
+export const setAuthLoading = () => {
   return {
-    type: actionType.LOADING
+    type: actionType.AUTH_LOADING
   };
 };
 

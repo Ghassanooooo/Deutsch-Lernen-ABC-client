@@ -3,18 +3,30 @@ import { connect } from "react-redux";
 import * as actions from "../../store/actions";
 import { Link } from "react-router-dom";
 import Spinner from "../common/spinner/spinner";
+import jwt_decode from "jwt-decode";
+import setAxiosAuth from "../../setAxiosAuthHeader";
 
 class Level extends Component {
   componentDidMount() {
     this.props.getLevels();
+    if (localStorage.getItem("token")) {
+      const token = localStorage.getItem("token");
+      setAxiosAuth(token);
+      const userDecoded = jwt_decode(token);
+      if (userDecoded) {
+        this.props.currentUser(userDecoded);
+      }
+    }
   }
   render() {
     const { errors } = this.props;
     return (
       <Fragment>
-        <Link to={"/level/add-level"} className="btn btn-primary">
-          Add New Level
-        </Link>
+        {this.props.user ? (
+          <Link to={"/level/add-level"} className="btn btn-primary">
+            Add New Level
+          </Link>
+        ) : null}
         {this.props.levels ? (
           this.props.levels.map(items => (
             <div
@@ -45,7 +57,8 @@ class Level extends Component {
 const mapStateToProps = state => ({
   errors: state.errors,
   levels: state.levels.levels,
-  loading: state.levels.loading
+  loading: state.levels.loading,
+  user: state.auth.user
 });
 export default connect(
   mapStateToProps,

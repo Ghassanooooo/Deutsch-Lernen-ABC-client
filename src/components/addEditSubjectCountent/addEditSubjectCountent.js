@@ -4,8 +4,20 @@ import axios from "axios";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import * as actions from "../../store/actions";
+import jwt_decode from "jwt-decode";
+import setAxiosAuth from "../../setAxiosAuthHeader";
 
 class AddEditSubjectCountent extends Component {
+  componentDidMount() {
+    if (localStorage.getItem("token")) {
+      const token = localStorage.getItem("token");
+      setAxiosAuth(token);
+      const userDecoded = jwt_decode(token);
+      if (userDecoded) {
+        this.props.currentUser(userDecoded);
+      }
+    }
+  }
   state = {
     beschreibung: "",
     inhaltenDeutsch: "",

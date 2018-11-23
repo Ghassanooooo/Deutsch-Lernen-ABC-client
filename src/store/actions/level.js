@@ -1,28 +1,30 @@
 import * as actionType from "./actionTypes";
 import axios from "axios";
 
-export const getLevels = () =>  dispatch => {
-  dispatch(setPostLoading());
-  axios.get("https://deutsch-lernen-abc.herokuapp.com/api/level")
-  .then(levels=>{
-    dispatch({
-      type: actionType.FETCH_LEVELS_SUCCEED,
-      payload: levels.data
+export const getLevels = () => dispatch => {
+  dispatch(setlevelLoading());
+  axios
+    .get("https://deutsch-lernen-abc.herokuapp.com/api/level")
+    .then(levels => {
+      dispatch({
+        type: actionType.FETCH_LEVELS_SUCCEED,
+        payload: levels.data
+      });
     })
-  })
-  .catch(e=>{
-    dispatch({
-      type: actionType.FETCH_LEVELS_FAILED
+    .catch(e => {
+      dispatch({
+        type: actionType.FETCH_LEVELS_FAILED
+      });
+      dispatch({
+        type: actionType.GET_ERRORS,
+        payload: e.response.data.error || null
+      });
     });
-    dispatch({
-      type: actionType.GET_ERRORS,
-      payload: e.response.data.error || null
-    });
-  })
 };
 
 export const addLevel = (data, history) => async dispatch => {
   try {
+    dispatch(setlevelLoading());
     const level = await axios.post(
       "https://deutsch-lernen-abc.herokuapp.com/api/level/add",
       data
@@ -43,9 +45,9 @@ export const addLevel = (data, history) => async dispatch => {
 };
 
 // Set loading state
-export const setPostLoading = () => {
+export const setlevelLoading = () => {
   return {
-    type: actionType.LOADING
+    type: actionType.LEVELS_LOADING
   };
 };
 

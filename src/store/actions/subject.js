@@ -2,10 +2,10 @@ import * as actionType from "./actionTypes";
 import axios from "axios";
 
 export const getSubjects = id => async dispatch => {
-  dispatch(setPostLoading());
   console.log(id);
 
   try {
+    dispatch(setSubjectsLoading());
     const subject = await axios.get(
       "https://deutsch-lernen-abc.herokuapp.com/api/subject/" + id
     );
@@ -27,6 +27,7 @@ export const getSubjects = id => async dispatch => {
   }
 };
 export const addSubject = (data, id, history) => dispatch => {
+  dispatch(setSubjectsLoading());
   axios
     .post(
       "https://deutsch-lernen-abc.herokuapp.com/api/subject/add/" + id,
@@ -48,9 +49,9 @@ export const addSubject = (data, id, history) => dispatch => {
 };
 
 // Set loading state
-export const setPostLoading = () => {
+export const setSubjectsLoading = () => {
   return {
-    type: actionType.LOADING
+    type: actionType.SUBJECT_LOADING
   };
 };
 
