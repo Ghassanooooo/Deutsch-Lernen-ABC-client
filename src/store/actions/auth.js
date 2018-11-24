@@ -42,7 +42,7 @@ export const login = (data, history) => async dispatch => {
     if (user) {
       console.log(user);
       dispatch(clearErrors());
-      localStorage.setItem("token", user.data.token);
+      localStorage.setItem("tokenABC", user.data.token);
       localStorage.setItem("expirationDate", user.data.expirationDate);
       localStorage.setItem("userId", user.data.userId);
       setAxiosAuth(user.data.token);
@@ -64,7 +64,7 @@ export const login = (data, history) => async dispatch => {
   }
 };
 export const logout = () => dispatch => {
-  localStorage.removeItem("token");
+  localStorage.removeItem("tokenABC");
   localStorage.removeItem("userId");
   localStorage.removeItem("expirationDate");
 
