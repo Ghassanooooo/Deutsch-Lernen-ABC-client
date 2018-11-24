@@ -13,8 +13,22 @@ import Login from "./components/login/login";
 import Signup from "./components/signup/signup";
 import addEditSubjectCountent from "./components/addEditSubjectCountent/addEditSubjectCountent";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import store from "./store";
+import * as actions from "./store/actions";
+import jwt_decode from "jwt-decode";
+import setAxiosAuth from "./setAxiosAuthHeader";
 
 class App extends Component {
+  componentDidMount() {
+    if (localStorage.getItem("token")) {
+      const token = localStorage.getItem("token");
+      setAxiosAuth(token);
+      const userDecoded = jwt_decode(token);
+      if (userDecoded) {
+        store.dispatch(actions.currentUser(userDecoded));
+      }
+    }
+  }
   render() {
     return (
       <div>
@@ -28,7 +42,7 @@ class App extends Component {
               exact
               component={SubjectContent}
             />
-            <Route path="/level/add-level" exact component={AddLevel} />
+            <PrivateRoute path="/level/add-level" exact component={AddLevel} />
             {/* <Route
             path="/SubColections/SubColectionContent/:id"
             exact

@@ -3,20 +3,10 @@ import { connect } from "react-redux";
 import * as actions from "../../store/actions";
 import { Link } from "react-router-dom";
 import Spinner from "../common/spinner/spinner";
-import jwt_decode from "jwt-decode";
-import setAxiosAuth from "../../setAxiosAuthHeader";
 
 class Level extends Component {
   componentDidMount() {
     this.props.getLevels();
-    if (localStorage.getItem("token")) {
-      const token = localStorage.getItem("token");
-      setAxiosAuth(token);
-      const userDecoded = jwt_decode(token);
-      if (userDecoded) {
-        this.props.currentUser(userDecoded);
-      }
-    }
   }
   render() {
     const { errors } = this.props;

@@ -3,21 +3,11 @@ import { withRouter, Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions";
 import Spinner from "../common/spinner/spinner";
-import jwt_decode from "jwt-decode";
-import setAxiosAuth from "../../setAxiosAuthHeader";
 
 class subjectContent extends Component {
   componentDidMount() {
     if (this.props.match.params.id) {
       this.props.getSubjectsContent(this.props.match.params.id);
-    }
-    if (localStorage.getItem("token")) {
-      const token = localStorage.getItem("token");
-      setAxiosAuth(token);
-      const userDecoded = jwt_decode(token);
-      if (userDecoded) {
-        this.props.currentUser(userDecoded);
-      }
     }
   }
   render() {
